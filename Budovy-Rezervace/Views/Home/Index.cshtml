@@ -1,0 +1,39 @@
+﻿@model List<BuildingModel>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h2>Menu</h2>
+            <hr/>
+            <a class="btn-primary" asp-action="RedirectToAddBuildingPage">Add new building</a>
+            <a class="btn-primary" asp-action="EditBuilding">Edit buildings</a>
+            <a class="btn-primary" asp-action="DeleteBuilding">Delete buildings</a>
+        </div>
+        <div class="col-9">
+            <h2>Welcome!</h2>
+            <hr/>
+            <div class="row">
+                 @{
+                                foreach (string data in System.IO.File.ReadLines("csv/buildings.csv").Skip(1))
+                                {
+                                    string[] buildingData = data.Split('|');
+                                    if (!buildingData[0].Equals("ID"))
+                                    {
+                                        <div class="col-3 building-panel">
+                                            <div class="textContainer">
+                                                <h4>@buildingData[1]</h4>
+                                                <h6>@buildingData[2]</h6>
+                                                <hr/>
+                                                <a class="btn-primary" asp-action="">Rooms</a>
+                                                </div>
+                                            </div>
+                                    }
+                                }
+                            }
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
