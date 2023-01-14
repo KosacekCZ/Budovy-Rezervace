@@ -57,3 +57,8 @@ body {
   text-overflow: ellipsis;
   width: 100%;
 }
+
+.descriptive-id {
+  font-size: 80%;
+  opacity: 0.5;
+}

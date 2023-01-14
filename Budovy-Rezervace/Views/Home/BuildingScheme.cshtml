@@ -1,0 +1,19 @@
+@using System.Collections
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-8 room-scheme">
+            <h2>@ViewData["buildingName"]</h2>
+            <h6>@ViewData["buildingAdress"]</h6>
+            <hr/>
+            @{
+                foreach (var room in (IEnumerable)ViewData["rooms"])
+                {
+                    
+                }
+            }
+
+        </div>
+    </div>
+</div>
+</body>

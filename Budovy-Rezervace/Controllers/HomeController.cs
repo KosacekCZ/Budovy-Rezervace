@@ -6,11 +6,12 @@ namespace Budovy_Rezervace.Controllers;
 
 public class HomeController : Controller
 {
-    public List<BuildingModel> budovy = new List<BuildingModel>();
-    
+    public Dictionary<string, BuildingModel> buildings = new Dictionary<string, BuildingModel>();
+
     public IActionResult Index()
     {
-        return View(budovy);
+        loadDataToDictionary();
+        return View();
     }
 
     public IActionResult Privacy()
@@ -18,7 +19,18 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult RedirectToAddBuildingPage()
+    public IActionResult BuildingScheme(string pid)
+    {
+        // Pre-process selective data by building PID
+        ViewData["pid"] = pid;
+        ViewData["rooms"] = buildings[pid].Rooms;
+        ViewData["buildingName"] = buildings[pid].Name;
+        ViewData["buildingAdress"] = buildings[pid].Adress;
+        
+        return View("BuildingScheme");
+    }
+
+    public IActionResult AddBuilding()
     {
         return View("CreateHouse");
     }
@@ -26,30 +38,32 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult CreateBuilding(string buildingName, string buildingAdress)
     {
-        string parsedBuildingdata = $"{generateID()} | {buildingName} | {buildingAdress} \n";
         // Save data to CSV, using ' | ' separator. format [id, buildingName, adress]
+        string parsedBuildingdata = $"{generateID()} | {buildingName} | {buildingAdress} \n";
         System.IO.File.AppendAllText("csv/buildings.csv", parsedBuildingdata);
+        
         return View("Index");
     }
 
+    [HttpPatch]
     public IActionResult EditBuilding() 
     {
         return View("Index");
     }
 
+    [HttpDelete]
     public IActionResult DeleteBuilding()
     {
         return View("Index");
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-    
     public string generateID()
     {
         return Guid.NewGuid().ToString("N");
+    }
+
+    public void loadDataToDictionary()
+    {
+        
     }
 }

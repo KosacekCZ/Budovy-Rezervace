@@ -1,4 +1,4 @@
-﻿@model List<BuildingModel>
+﻿@model BuildingModel
 
 <body>
 <div class="container">
@@ -6,7 +6,7 @@
         <div class="col-3">
             <h2>Menu</h2>
             <hr/>
-            <a class="btn-primary" asp-action="RedirectToAddBuildingPage">Add new building</a>
+            <a class="btn-primary" asp-action="AddBuilding">Add new building</a>
             <a class="btn-primary" asp-action="EditBuilding">Edit buildings</a>
             <a class="btn-primary" asp-action="DeleteBuilding">Delete buildings</a>
         </div>
@@ -24,8 +24,9 @@
                                             <div class="textContainer">
                                                 <h4>@buildingData[1]</h4>
                                                 <h6>@buildingData[2]</h6>
+                                                <p class="descriptive-id">PID: @buildingData[0]</p>
                                                 <hr/>
-                                                <a class="btn-primary" asp-action="">Rooms</a>
+                                                <a class="btn-primary" name="@buildingData[0]" asp-action="BuildingScheme">Building Scheme</a>
                                                 </div>
                                             </div>
                                     }

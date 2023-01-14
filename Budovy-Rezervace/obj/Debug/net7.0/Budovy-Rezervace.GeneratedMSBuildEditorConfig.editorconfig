@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace
 build_property._RazorSourceGeneratorDebug = 
 
+[/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Views/Home/BuildingScheme.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9CdWlsZGluZ1NjaGVtZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Views/Home/CreateHouse.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9DcmVhdGVIb3VzZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
