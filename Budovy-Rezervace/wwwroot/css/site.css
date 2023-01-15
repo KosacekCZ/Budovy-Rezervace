@@ -34,6 +34,7 @@ body {
   background: linear-gradient(16deg, rgba(65,57,195,1) 0%, rgba(15,133,199,1) 0%, rgba(199,11,215,1) 100%);
   opacity: 0.8;
   transition: 0.4s;
+  border: none;
 }
 
 .btn-primary:hover {
@@ -46,14 +47,14 @@ body {
   color: #fff;
   border-radius: 10px;
   margin: 10px 10px;
-  padding: 20px;
+  padding: 30px;
   width: 300px;
   min-height: 100%;
 }
 
 .textContainer {
   white-space: nowrap;
-  overflow: clip;
+  overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
 }
@@ -61,4 +62,11 @@ body {
 .descriptive-id {
   font-size: 80%;
   opacity: 0.5;
+}
+
+.control-panel-block {
+  margin: 10px auto;
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 10px;
 }

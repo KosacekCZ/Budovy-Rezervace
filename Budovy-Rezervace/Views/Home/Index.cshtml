@@ -6,32 +6,61 @@
         <div class="col-3">
             <h2>Menu</h2>
             <hr/>
-            <a class="btn-primary" asp-action="AddBuilding">Add new building</a>
-            <a class="btn-primary" asp-action="EditBuilding">Edit buildings</a>
-            <a class="btn-primary" asp-action="DeleteBuilding">Delete buildings</a>
+            <div class="control-panel-block">
+                <h3>Add building</h3>
+                <hr/>
+                <form asp-controller="Home" asp-action="CreateBuilding" method="post">
+                    <label for="buildingName">Building name:</label><br/>
+                    <input type="text" id="buildingName" name="buildingName"/><br/>
+                    <label for="buildingAdress">Adress:</label><br/>
+                    <input type="text" id="buildingAdress" name="buildingAdress"/><br/>
+                    <input class="btn-primary" type="submit"/>
+                </form>
+            </div>
+            <div class="control-panel-block">
+                <h3>Remove building</h3>
+                <hr/>
+                <form asp-controller="Home" asp-action="DeleteBuilding" method="post">
+                    <select>
+                        @{
+                            foreach (string data in System.IO.File.ReadLines("Data/Buildings/buildings.csv").Skip(1))
+                            {
+                                string[] buildingData = data.Split('|');
+                                <option name="buildingId" >@buildingData[0]</option>
+                            }
+                        }
+                    </select>
+                    <input class="btn-primary" type="submit">
+                </form>
+            </div>
         </div>
         <div class="col-9">
             <h2>Welcome!</h2>
             <hr/>
             <div class="row">
-                 @{
-                                foreach (string data in System.IO.File.ReadLines("csv/buildings.csv").Skip(1))
-                                {
-                                    string[] buildingData = data.Split('|');
-                                    if (!buildingData[0].Equals("ID"))
-                                    {
-                                        <div class="col-3 building-panel">
-                                            <div class="textContainer">
-                                                <h4>@buildingData[1]</h4>
-                                                <h6>@buildingData[2]</h6>
-                                                <p class="descriptive-id">PID: @buildingData[0]</p>
-                                                <hr/>
-                                                <a class="btn-primary" name="@buildingData[0]" asp-action="BuildingScheme">Building Scheme</a>
-                                                </div>
-                                            </div>
-                                    }
-                                }
-                            }
+                @{
+                    foreach (string data in System.IO.File.ReadLines("Data/Buildings/buildings.csv").Skip(1))
+                    {
+                        string[] buildingData = data.Split('|');
+                        <div class="col-3 building-panel">
+                            <div class="textContainer">
+                                <h4>
+                                    <span>@buildingData[1]</span>
+                                </h4>
+                                <h6>
+                                    <span>@buildingData[2]</span>
+                                </h6>
+                                <p class="descriptive-id">PID: @buildingData[0]</p>
+                                <hr/>
+                                @Html.ActionLink("Building Scheme",
+                                    "BuildingScheme",
+                                    new { pid = buildingData[0] },
+                                    new { @class = "btn-primary" })
+
+                            </div>
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>

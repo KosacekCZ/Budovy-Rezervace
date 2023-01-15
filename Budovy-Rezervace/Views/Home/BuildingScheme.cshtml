@@ -1,4 +1,5 @@
 @using System.Collections
+@model Room
 <body>
 <div class="container">
     <div class="row">
@@ -9,7 +10,9 @@
             @{
                 foreach (var room in (IEnumerable)ViewData["rooms"])
                 {
-                    
+                    <div>
+                        <h3>@room</h3>
+                    </div>
                 }
             }
 

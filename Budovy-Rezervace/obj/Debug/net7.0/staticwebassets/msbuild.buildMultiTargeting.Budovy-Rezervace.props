@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../build/Budovy-Rezervace.props" />
+  <Import Project="..\build\Budovy-Rezervace.props" />
 </Project>

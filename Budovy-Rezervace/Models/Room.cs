@@ -5,6 +5,12 @@ namespace Budovy_Rezervace.Models;
 public class Room
 {
     [Required]
-    public int RoomID { get; set; }
+    public string RoomId { get; set; }
+
+    public Room(string id)
+    {
+        RoomId = id;
+        
+    }
     
 }
