@@ -31,6 +31,7 @@ public class HomeController : Controller
         string parsedBuildingdata = $"{id} | {buildingName} | {buildingAdress} \n";
         string dataPath = $"Data/Buildings/{id}";
         Directory.CreateDirectory(dataPath);
+        System.IO.File.Create($"{dataPath}/rooms.csv");
         System.IO.File.AppendAllText("Data/Buildings/buildings.csv", parsedBuildingdata);
         
         return View("Index");
@@ -67,7 +68,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult CreateRoom(string pid)
+    public IActionResult CreateRoom(string pid, int roomNum, string location, string descr)
     {
         
         LoadBuildingScheme(pid);
