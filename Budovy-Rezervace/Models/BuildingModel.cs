@@ -31,5 +31,10 @@ public class BuildingModel
         Rooms = rooms;
     }
 
+    public override string ToString()
+    {
+        return $"{BuildingId}, {Name}, {Adress}\n";
+    }
+
 
 }

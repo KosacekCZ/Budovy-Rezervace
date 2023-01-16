@@ -21,12 +21,12 @@
                 <h3>Remove building</h3>
                 <hr/>
                 <form asp-controller="Home" asp-action="DeleteBuilding" method="post">
-                    <select>
+                    <select name="buildingId">
                         @{
                             foreach (string data in System.IO.File.ReadLines("Data/Buildings/buildings.csv").Skip(1))
                             {
                                 string[] buildingData = data.Split('|');
-                                <option name="buildingId" >@buildingData[0]</option>
+                                <option>@buildingData[0]</option>
                             }
                         }
                     </select>

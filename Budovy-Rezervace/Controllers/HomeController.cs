@@ -19,14 +19,7 @@ public class HomeController : Controller
 
     public IActionResult BuildingScheme(string pid)
     {
-        // Temporary restructure data to Dictionary
-        LoadDataToDictionary();
-        // Pre-process selective data by building PID
-        ViewData["pid"] = pid;
-        ViewData["rooms"] = buildings[pid].Rooms;
-        ViewData["buildingName"] = buildings[pid].Name;
-        ViewData["buildingAdress"] = buildings[pid].Adress;
-        
+        LoadBuildingScheme(pid);
         return View("BuildingScheme");
     }
 
@@ -49,20 +42,47 @@ public class HomeController : Controller
         return View("Index");
     }
 
-    [HttpDelete]
+    [HttpPost]
     public IActionResult DeleteBuilding(string buildingId)
     {
         LoadDataToDictionary();
         buildings.Remove(buildingId);
-        string NewData = "";
+        foreach (var building in buildings)
+        {
+            Console.WriteLine(building.ToString());
+        }
+        string newData = "ID | Building Name | Building Adress \n";;
         foreach (var entry in buildings)
         {
-            NewData += $"{entry.Key} | {entry.Value.Name} | {entry.Value.Adress}\n";
+            newData += $"{entry.Key} | {entry.Value.Name} | {entry.Value.Adress}\n";
+        }
+        
+        using (StreamWriter wr = new StreamWriter("Data/Buildings/buildings.csv"))
+        {
+            wr.WriteLine(newData);
         }
 
-        System.IO.File.CreateText("Data/Buildings/buildings.csv");
-
+        buildings.Clear();
         return View("Index");
+    }
+
+    [HttpPost]
+    public IActionResult CreateRoom(string pid)
+    {
+        
+        LoadBuildingScheme(pid);
+        return View("BuildingScheme");
+    }
+
+    public void LoadBuildingScheme(string pid)
+    {
+        // Temporary restructure data to Dictionary
+        LoadDataToDictionary();
+        // Pre-process selective data by building PID
+        ViewData["pid"] = pid;
+        ViewData["rooms"] = buildings[pid].Rooms;
+        ViewData["buildingName"] = buildings[pid].Name;
+        ViewData["buildingAdress"] = buildings[pid].Adress;
     }
 
     public string GenerateId()
@@ -87,4 +107,5 @@ public class HomeController : Controller
             Console.WriteLine(buildings.Count);
         }
     }
+    
 }

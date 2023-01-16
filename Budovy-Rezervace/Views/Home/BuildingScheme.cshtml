@@ -3,7 +3,16 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-8 room-scheme">
+        <div class="col-3">
+            <div class="building-panel">
+                <h3>Add Room</h3>
+                <hr/>
+                <form method="post" asp-controller="Home" asp-action="">
+                    
+                </form>
+            </div>
+        </div>
+        <div class="col-9 room-scheme">
             <h2>@ViewData["buildingName"]</h2>
             <h6>@ViewData["buildingAdress"]</h6>
             <hr/>
