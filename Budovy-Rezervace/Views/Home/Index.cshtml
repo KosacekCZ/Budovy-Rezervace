@@ -11,9 +11,9 @@
                 <hr/>
                 <form asp-controller="Home" asp-action="CreateBuilding" method="post">
                     <label for="buildingName">Building name:</label><br/>
-                    <input type="text" id="buildingName" name="buildingName"/><br/>
+                    <input type="text" id="buildingName" name="buildingName" class="input-group"/><br/>
                     <label for="buildingAdress">Adress:</label><br/>
-                    <input type="text" id="buildingAdress" name="buildingAdress"/><br/>
+                    <input type="text" id="buildingAdress" name="buildingAdress" class="input-group"/><br/>
                     <input class="btn-primary" type="submit"/>
                 </form>
             </div>
@@ -21,7 +21,7 @@
                 <h3>Remove building</h3>
                 <hr/>
                 <form asp-controller="Home" asp-action="DeleteBuilding" method="post">
-                    <select name="buildingId">
+                    <select name="buildingId" class="form-select">
                         @{
                             foreach (string data in System.IO.File.ReadLines("Data/Buildings/buildings.csv").Skip(1))
                             {

@@ -28,17 +28,17 @@ public class HomeController : Controller
     {
         // Save data to CSV, using ' | ' separator. format [id, buildingName, adress]
         string id = GenerateId();
-        string parsedBuildingdata = $"{id} | {buildingName} | {buildingAdress} \n";
+        string parsedBuildingdata = $"{id}|{buildingName}|{buildingAdress}\n";
         string dataPath = $"Data/Buildings/{id}";
         Directory.CreateDirectory(dataPath);
         System.IO.File.Create($"{dataPath}/rooms.csv");
         System.IO.File.AppendAllText("Data/Buildings/buildings.csv", parsedBuildingdata);
-        
+
         return View("Index");
     }
 
     [HttpPatch]
-    public IActionResult EditBuilding() 
+    public IActionResult EditBuilding()
     {
         return View("Index");
     }
@@ -46,31 +46,35 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult DeleteBuilding(string buildingId)
     {
-        LoadDataToDictionary();
-        buildings.Remove(buildingId);
-        foreach (var building in buildings)
+        Console.WriteLine(buildingId);
+        Dictionary<string, BuildingModel> temp = TemporaryDataLoader();
+        temp.Remove(buildingId);
+        Directory.Delete($"Data/Buildings/{buildingId}", true);
+
+        using (var fs = new FileStream("Data/Buildings/buildings.csv", FileMode.Truncate)){}
+        using (StreamWriter wr = new StreamWriter("Data/Buildings/buildings.csv", append: true))
         {
-            Console.WriteLine(building.ToString());
+            wr.WriteLine("ID | Building Name | Building Adress");
+            wr.Close();
         }
-        string newData = "ID | Building Name | Building Adress \n";;
-        foreach (var entry in buildings)
+
+        foreach (var entry in temp)
         {
-            newData += $"{entry.Key} | {entry.Value.Name} | {entry.Value.Adress}\n";
-        }
-        
-        using (StreamWriter wr = new StreamWriter("Data/Buildings/buildings.csv"))
-        {
-            wr.WriteLine(newData);
+            using (StreamWriter wr = new StreamWriter("Data/Buildings/buildings.csv", append: true))
+            {
+                wr.WriteLine($"{entry.Key.Trim(' ')}|{entry.Value.Name}|{entry.Value.Adress}");
+                wr.Close();
+            }
         }
 
         buildings.Clear();
+        temp.Clear();
         return View("Index");
     }
 
     [HttpPost]
     public IActionResult CreateRoom(string pid, int roomNum, string location, string descr)
     {
-        
         LoadBuildingScheme(pid);
         return View("BuildingScheme");
     }
@@ -86,27 +90,42 @@ public class HomeController : Controller
         ViewData["buildingAdress"] = buildings[pid].Adress;
     }
 
-    public string GenerateId()
+    private string GenerateId()
     {
         return Guid.NewGuid().ToString("N");
     }
 
-    public void LoadDataToDictionary()
+    private void LoadDataToDictionary()
     {
         if (buildings.Count == 0)
         {
             foreach (string data in System.IO.File.ReadLines("Data/Buildings/buildings.csv").Skip(1))
             {
                 string[] buildingData = data.Split('|');
-                buildings.Add(buildingData[0], 
-                    new BuildingModel(buildingData[0], 
-                        buildingData[1], 
-                        buildingData[2], 
+                buildings.Add(buildingData[0],
+                    new BuildingModel(buildingData[0],
+                        buildingData[1],
+                        buildingData[2],
                         new Dictionary<string, Room>()));
                 Console.WriteLine(data);
             }
+
             Console.WriteLine(buildings.Count);
         }
     }
-    
+
+    private Dictionary<string, BuildingModel> TemporaryDataLoader()
+    {
+        Dictionary<string, BuildingModel> temp = new Dictionary<string, BuildingModel>();
+        foreach (string data in System.IO.File.ReadLines("Data/Buildings/buildings.csv").Skip(1))
+        {
+            string[] buildingData = data.Split('|');
+            temp.Add(buildingData[0],
+                new BuildingModel(buildingData[0],
+                    buildingData[1],
+                    buildingData[2],
+                    new Dictionary<string, Room>()));
+        }
+        return temp;
+    }
 }
