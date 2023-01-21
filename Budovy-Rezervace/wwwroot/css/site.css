@@ -156,14 +156,14 @@ body {
 }
 
 .chart-container hr {
-  margin: 0px 0px 30px 0px;
+  margin: 0px 0px 40px 0px;
 }
 
 .chart-visual-col {
   border-right: 1px dashed #333333;
   border-bottom: 1px dashed #333333;
   width: 4.16%;
-  height: 10vh;
+  height: 15vh;
   display: inline;
   position: relative;
   border-collapse: collapse;

@@ -7,9 +7,9 @@
                 <hr/>
                 <form>
                     <label for="eventStart">Event Start</label><br/>
-                    <input name="eventStart" required="required" type="datetime"/><br/>
+                    <input class="input-group" name="eventStart" required="required" type="datetime-local"/><br/>
                     <label for="eventEnd">Event End</label><br/>
-                    <input name="eventEnd" required="required" type="datetime"/><br/>
+                    <input class="input-group" name="eventEnd" required="required" type="datetime-local"/><br/>
                 </form>
 
             </div>
@@ -24,6 +24,11 @@
                         <div class="chart-visual-col">
                             <span class="chart-time-label">@i:00</span>
                         </div>
+                    }
+                    
+                    @foreach ()
+                    {
+                        <div class="reservation-block" style=""></div>
                     }
                 </div>
                 <div class="description-legend">

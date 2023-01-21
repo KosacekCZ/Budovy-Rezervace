@@ -80,7 +80,7 @@ public class HomeController : Controller
         System.IO.File.AppendAllText($"{dataPath}/rooms.csv", data);
         // Create directory structure for room schedules
         Directory.CreateDirectory($"{dataPath}/{roomNum}");
-        System.IO.File.Create($"{dataPath}/{roomNum}/schedule.csv");
+        CreateScheduleCsv($"{dataPath}/{roomNum}/schedule.csv");
         // Return
         LoadBuildingScheme(pid);
         return View("BuildingScheme");
@@ -144,5 +144,10 @@ public class HomeController : Controller
         System.IO.File.WriteAllText("Data/Buildings/buildings.csv", "ID | Building Name | Building Adress\n");*/
         return Index();
     }
-    
+
+    private void CreateScheduleCsv(String path)
+    {
+        System.IO.File.Create(path);
+        System.IO.File.WriteAllText(path, "Date | Time Start | Time End | Event Name | Event Description");
+    }
 }
