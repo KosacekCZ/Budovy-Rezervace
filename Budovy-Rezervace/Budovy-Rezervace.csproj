@@ -7,4 +7,9 @@
         <RootNamespace>Budovy_Rezervace</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\img\logo.svg" />
+      <None Include="wwwroot\img\logo_ink.svg" />
+    </ItemGroup>
+
 </Project>

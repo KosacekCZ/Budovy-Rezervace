@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg5"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient353">
+      <stop
+         style="stop-color:#005fd5;stop-opacity:1;"
+         offset="0"
+         id="stop349" />
+      <stop
+         style="stop-color:#e100d1;stop-opacity:1;"
+         offset="1"
+         id="stop351" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient353"
+       id="linearGradient355"
+       x1="34.456799"
+       y1="41.266876"
+       x2="71.655807"
+       y2="25.262148"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       xlink:href="#linearGradient353"
+       id="linearGradient2077"
+       x1="5.9089031"
+       y1="17.363247"
+       x2="94.907974"
+       y2="17.363247"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-0.18777579,1.7885336)" />
+    <linearGradient
+       xlink:href="#linearGradient353"
+       id="linearGradient2112"
+       gradientUnits="userSpaceOnUse"
+       x1="5.9089031"
+       y1="17.363247"
+       x2="94.907974"
+       y2="17.363247"
+       gradientTransform="matrix(1.0146849,0,0,1,-0.60125744,61.256278)" />
+  </defs>
+  <g
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:'Noto Music';-inkscape-font-specification:'Noto Music Bold';white-space:pre;inline-size:0;fill:url(#linearGradient355);fill-opacity:1;stroke-width:0.264583;image-rendering:auto"
+       x="31.576927"
+       y="41.956863"
+       id="text113"
+       transform="matrix(2.1395028,0,0,2.4295673,-66.66175,-30.760647)"><tspan
+         id="tspan111"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:'Noto Music';-inkscape-font-specification:'Noto Music Bold';fill:url(#linearGradient355);fill-opacity:1;stroke-width:0.264583"
+         x="31.576927"
+         y="41.956863">ERS</tspan></text>
+    <rect
+       style="fill:url(#linearGradient2077);fill-opacity:1;stroke-width:50.0126;stroke-dasharray:none"
+       id="rect2069"
+       width="88.999069"
+       height="7.5237923"
+       x="5.7211275"
+       y="15.389883" />
+    <rect
+       style="fill:url(#linearGradient2112);fill-opacity:1;stroke-width:50.3785;stroke-dasharray:none"
+       id="rect2069-9"
+       width="90.306015"
+       height="7.5237923"
+       x="5.3944178"
+       y="74.857628" />
+  </g>
+</svg>

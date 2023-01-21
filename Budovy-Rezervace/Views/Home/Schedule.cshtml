@@ -1,0 +1,41 @@
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <div class="control-panel-block">
+                <h3>Add Event</h3>
+                <hr/>
+                <form>
+                    <label for="eventStart">Event Start</label><br/>
+                    <input name="eventStart" required="required" type="datetime"/><br/>
+                    <label for="eventEnd">Event End</label><br/>
+                    <input name="eventEnd" required="required" type="datetime"/><br/>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="chart-container">
+                <h3>Date</h3>
+                <hr/>
+                <div class="row">
+                    @for (int i = 0; i < 24; i++)
+                    {
+                        <div class="chart-visual-col">
+                            <span class="chart-time-label">@i:00</span>
+                        </div>
+                    }
+                </div>
+                <div class="description-legend">
+                    <div class="clr-icon-regular"></div>
+                    <p class="chart-data-legend">Regular</p>
+                    <div class="clr-icon-substitute"></div>
+                    <p class="chart-data-legend">Substitute</p>
+                    <div class="clr-icon-edited"></div>
+                    <p class="chart-data-legend">Edited</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

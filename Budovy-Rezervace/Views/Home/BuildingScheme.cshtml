@@ -5,35 +5,48 @@
     <div class="row">
         <div class="col-12">
             <h2>@ViewData["buildingName"]</h2>
-                        <h6>@ViewData["buildingAdress"]</h6>
-                        <hr/>
+            <h6>@ViewData["buildingAdress"]</h6>
+            <hr/>
         </div>
         <div class="col-3">
             <div class="control-panel-block">
                 <h3>Add Room</h3>
                 <hr/>
-                <form method="post" asp-controller="Home" asp-action="CreateRoom">
+                <form method="post" asp-controller="Home" asp-action="CreateRoom" asp-route-pid="@ViewData["pid"]">
                     <label for="roomNum">Room No.</label>
-                    <input name="roomNum" type="number"/>
+                    <input class="input-group" name="roomNum" type="number" required="required"/>
                     <label for="location">Location</label>
-                    <input name="location" type="text"/>
+                    <input class="input-group" name="location" type="text" required="required"/>
                     <label for="descr">Room Description</label>
-                    <textarea type="text" name="descr"></textarea>
-                    <input class="btn-primary" type="submit"/>
+                    <textarea class="input-group" type="text" name="descr"></textarea>
+                    <input class="btn-primary gradient-red" type="submit"/>
                 </form>
             </div>
         </div>
         <div class="col-9 room-scheme">
+            <div class="row">
+                @{
+                    foreach (string data in System.IO.File.ReadLines($"Data/Buildings/{@ViewData["pid"]}/rooms.csv").Skip(1))
+                    {
+                        string[] roomData = data.Split('|');
 
-            @{
-                foreach (var room in (IEnumerable)ViewData["rooms"])
-                {
-                    <div>
-                        <h3>@room</h3>
-                    </div>
+                        <div class="col-3 room-panel">
+                            <div class="textContainer">
+                                <h3>Room: @roomData[1]</h3>
+                                <h5>@roomData[2]</h5>
+                                <p class="descriptive-id">RID: @roomData[0]</p>
+                                <p class="descriptive-info">@(roomData[3].Length > 30 ? $"{roomData[3].Substring(0, 30)}..." : roomData[3])</p>
+                                <hr/>
+                                @Html.ActionLink("Schedule",
+                                    "BuildingScheme",
+                                    new { rid = roomData[0]},
+                                    new { @class = "btn-primary gradient-red" })
+                            </div>
+
+                        </div>
+                    }
                 }
-            }
-
+            </div>
         </div>
     </div>
 </div>

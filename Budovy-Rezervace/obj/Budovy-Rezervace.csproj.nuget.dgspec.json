@@ -1,24 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "X:\\IntelliJ\\IdeaProjects\\Budovy-Rezervace\\Budovy-Rezervace\\Budovy-Rezervace.csproj": {}
+    "/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Budovy-Rezervace.csproj": {}
   },
   "projects": {
-    "X:\\IntelliJ\\IdeaProjects\\Budovy-Rezervace\\Budovy-Rezervace\\Budovy-Rezervace.csproj": {
+    "/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Budovy-Rezervace.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "X:\\IntelliJ\\IdeaProjects\\Budovy-Rezervace\\Budovy-Rezervace\\Budovy-Rezervace.csproj",
+        "projectUniqueName": "/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Budovy-Rezervace.csproj",
         "projectName": "Budovy-Rezervace",
-        "projectPath": "X:\\IntelliJ\\IdeaProjects\\Budovy-Rezervace\\Budovy-Rezervace\\Budovy-Rezervace.csproj",
-        "packagesPath": "C:\\Users\\kosac\\.nuget\\packages\\",
-        "outputPath": "X:\\IntelliJ\\IdeaProjects\\Budovy-Rezervace\\Budovy-Rezervace\\obj\\",
+        "projectPath": "/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Budovy-Rezervace.csproj",
+        "packagesPath": "/home/mikolasp/.nuget/packages/",
+        "outputPath": "/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kosac\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/mikolasp/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
@@ -45,6 +48,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.2, 7.0.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -53,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

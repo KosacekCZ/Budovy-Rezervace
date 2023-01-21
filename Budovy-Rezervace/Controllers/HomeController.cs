@@ -17,6 +17,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Schedule()
+    {
+        return View();
+    }
+
     public IActionResult BuildingScheme(string pid)
     {
         LoadBuildingScheme(pid);
@@ -31,7 +36,7 @@ public class HomeController : Controller
         string parsedBuildingdata = $"{id}|{buildingName}|{buildingAdress}\n";
         string dataPath = $"Data/Buildings/{id}";
         Directory.CreateDirectory(dataPath);
-        System.IO.File.Create($"{dataPath}/rooms.csv");
+        System.IO.File.WriteAllText($"{dataPath}/rooms.csv", "PID | Room Number | Location | Description\n");
         System.IO.File.AppendAllText("Data/Buildings/buildings.csv", parsedBuildingdata);
 
         return View("Index");
@@ -50,23 +55,16 @@ public class HomeController : Controller
         Dictionary<string, BuildingModel> temp = TemporaryDataLoader();
         temp.Remove(buildingId);
         Directory.Delete($"Data/Buildings/{buildingId}", true);
-
-        using (var fs = new FileStream("Data/Buildings/buildings.csv", FileMode.Truncate)){}
-        using (StreamWriter wr = new StreamWriter("Data/Buildings/buildings.csv", append: true))
-        {
-            wr.WriteLine("ID | Building Name | Building Adress");
-            wr.Close();
-        }
+        
+        // Write new File header to CSV, re-create file
+        System.IO.File.WriteAllText("Data/Buildings/buildings.csv", 
+            "ID | Building Name | Building Adress\n");
 
         foreach (var entry in temp)
         {
-            using (StreamWriter wr = new StreamWriter("Data/Buildings/buildings.csv", append: true))
-            {
-                wr.WriteLine($"{entry.Key.Trim(' ')}|{entry.Value.Name}|{entry.Value.Adress}");
-                wr.Close();
-            }
+            System.IO.File.AppendAllText("Data/Buildings/buildings.csv", 
+                $"{entry.Key.Trim(' ')}|{entry.Value.Name}|{entry.Value.Adress}\n");
         }
-
         buildings.Clear();
         temp.Clear();
         return View("Index");
@@ -75,6 +73,15 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult CreateRoom(string pid, int roomNum, string location, string descr)
     {
+        // Create headers for data
+        string data = $"{GenerateId()}|{roomNum}|{location}|{descr}\n";
+        string dataPath = $"Data/Buildings/{pid}/";
+        // Write data to CSV
+        System.IO.File.AppendAllText($"{dataPath}/rooms.csv", data);
+        // Create directory structure for room schedules
+        Directory.CreateDirectory($"{dataPath}/{roomNum}");
+        System.IO.File.Create($"{dataPath}/{roomNum}/schedule.csv");
+        // Return
         LoadBuildingScheme(pid);
         return View("BuildingScheme");
     }
@@ -107,10 +114,10 @@ public class HomeController : Controller
                         buildingData[1],
                         buildingData[2],
                         new Dictionary<string, Room>()));
-                Console.WriteLine(data);
+               // Console.WriteLine(data);
             }
 
-            Console.WriteLine(buildings.Count);
+           // Console.WriteLine(buildings.Count);
         }
     }
 
@@ -128,4 +135,14 @@ public class HomeController : Controller
         }
         return temp;
     }
+
+    public IActionResult DumpCsvData()
+    {
+        Response.WriteAsync("<script>alert('system alert')</script>");
+        /*Directory.Delete("Data/Buildings", true);
+        Directory.CreateDirectory("Data/buildings/");
+        System.IO.File.WriteAllText("Data/Buildings/buildings.csv", "ID | Building Name | Building Adress\n");*/
+        return Index();
+    }
+    
 }

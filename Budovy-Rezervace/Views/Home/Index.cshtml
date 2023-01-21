@@ -1,6 +1,7 @@
 ﻿@model BuildingModel
 
 <body>
+
 <div class="container">
     <div class="row">
         <div class="col-3">
@@ -11,9 +12,9 @@
                 <hr/>
                 <form asp-controller="Home" asp-action="CreateBuilding" method="post">
                     <label for="buildingName">Building name:</label><br/>
-                    <input type="text" id="buildingName" name="buildingName" class="input-group"/><br/>
+                    <input type="text" id="buildingName" name="buildingName" class="input-group" required="required"/><br/>
                     <label for="buildingAdress">Adress:</label><br/>
-                    <input type="text" id="buildingAdress" name="buildingAdress" class="input-group"/><br/>
+                    <input type="text" id="buildingAdress" name="buildingAdress" class="input-group" required="required"/><br/>
                     <input class="btn-primary" type="submit"/>
                 </form>
             </div>
@@ -21,7 +22,7 @@
                 <h3>Remove building</h3>
                 <hr/>
                 <form asp-controller="Home" asp-action="DeleteBuilding" method="post">
-                    <select name="buildingId" class="form-select">
+                    <select name="buildingId" class="form-select" required="required">
                         @{
                             foreach (string data in System.IO.File.ReadLines("Data/Buildings/buildings.csv").Skip(1))
                             {
@@ -33,9 +34,15 @@
                     <input class="btn-primary" type="submit">
                 </form>
             </div>
+            <div class="control-panel-block">
+                <h3>Utilities</h3>
+                <hr/>
+                <a class="btn-danger" asp-action="DumpCsvData" onclick="">Dump CSV</a>
+                <a class="btn-primary" asp-action="Schedule">chart-test</a>
+            </div>
         </div>
         <div class="col-9">
-            <h2>Welcome!</h2>
+            <h2>Buildings</h2>
             <hr/>
             <div class="row">
                 @{
