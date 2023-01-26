@@ -28,12 +28,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Views/Home/Schedule.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9TY2hlZHVsZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Views/Shared/Schedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1NjaGVkdWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Views/Shared/_ValidationScriptsPartial.cshtml]

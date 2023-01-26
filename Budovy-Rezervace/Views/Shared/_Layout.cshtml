@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Runtime.InteropServices.JavaScript
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -25,6 +26,7 @@
                     </li>
                 </ul>
             </div>
+            <h4 class="header-gradient-text system-time">@DateTime.Today.Date.ToString().Split(" ")[0]</h4>
         </div>
     </nav>
 </header>

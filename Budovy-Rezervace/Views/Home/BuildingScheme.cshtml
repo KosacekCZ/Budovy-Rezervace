@@ -1,4 +1,3 @@
-@using System.Collections
 @model Room
 <body>
 <div class="container">
@@ -38,8 +37,8 @@
                                 <p class="descriptive-info">@(roomData[3].Length > 30 ? $"{roomData[3].Substring(0, 30)}..." : roomData[3])</p>
                                 <hr/>
                                 @Html.ActionLink("Schedule",
-                                    "BuildingScheme",
-                                    new { rid = roomData[0]},
+                                    "RoomSchedule",
+                                    new {bname = ViewData["buildingName"], pid = ViewData["pid"], rid = roomData[1]},
                                     new { @class = "btn-primary gradient-red" })
                             </div>
 

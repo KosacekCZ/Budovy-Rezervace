@@ -97,7 +97,15 @@ public class HomeController : Controller
         ViewData["buildingAdress"] = buildings[pid].Adress;
     }
 
-    private string GenerateId()
+    public IActionResult RoomSchedule(string bname, string pid, int rid)
+    {
+        ViewData["pid"] = pid;
+        ViewData["rid"] = rid;
+        ViewData["bname"] = bname;
+        return View("Schedule");
+    }
+
+    public string GenerateId()
     {
         return Guid.NewGuid().ToString("N");
     }
@@ -148,6 +156,6 @@ public class HomeController : Controller
     private void CreateScheduleCsv(String path)
     {
         System.IO.File.Create(path);
-        System.IO.File.WriteAllText(path, "Date | Time Start | Time End | Event Name | Event Description");
+        System.IO.File.WriteAllTextAsync(path, "Date | Time Start | Time End | Event Name | Event Description");
     }
 }

@@ -1,3 +1,12 @@
+:root {
+  --primary-bg: #fff;
+  --secondary-bg: #f5f5f5;
+  --text-primary: #000;
+  --text-contrast: #fff;
+  --misc-colors: #333;
+
+}
+
 html {
   font-size: 14px;
 }
@@ -15,11 +24,17 @@ html {
 html {
   position: relative;
   min-height: 100%;
+  background-color: var(--primary-bg);
 }
 
 body {
   margin-bottom: 60px;
+  background-color: var(--primary-bg);
 }
+
+/* h1, h2, h3, h4, h5, h6, p, a, span, div {
+  color: var(--text-primary);
+} */
 
 .btn-primary {
   padding: 10px;
@@ -29,7 +44,7 @@ body {
   display: block;
   text-decoration: none;
   text-align: center;
-  color: #fff;
+  color: var(--text-contrast);
   background: rgb(65,57,195);
   background: linear-gradient(16deg, rgba(65,57,195,1) 0%, rgba(15,133,199,1) 0%, rgba(199,11,215,1) 100%);
   opacity: 0.8;
@@ -47,7 +62,7 @@ body {
   display: block;
   text-decoration: none;
   text-align: center;
-  color: #fff;
+  color: var(--text-contrast);
   opacity: 0.8;
   transition: 0.25s;
   border: none;
@@ -60,7 +75,7 @@ body {
 .building-panel {
   background: rgb(65,57,195);
   background: linear-gradient(16deg, rgba(65,57,195,1) 0%, rgba(8,52,133,1) 0%, rgba(7,109,249,1) 100%);
-  color: #fff;
+  color: var(--text-contrast) !important;
   border-radius: 10px;
   margin: 10px 10px;
   padding: 25px;
@@ -71,7 +86,7 @@ body {
 .room-panel {
   background: rgb(65,57,195);
   background: linear-gradient(41deg, rgba(65,57,195,1) 0%, rgba(164,0,0,1) 0%, rgba(236,16,179,1) 100%);
-  color: #fff;
+  color: var(--text-contrast) !important;
   border-radius: 10px;
   margin: 10px 10px;
   padding: 25px;
@@ -97,7 +112,7 @@ body {
 
 .control-panel-block {
   margin: 10px auto;
-  background: #f5f5f5;
+  background: var(--secondary-bg);
   padding: 20px;
   border-radius: 10px;
 }
@@ -149,9 +164,9 @@ body {
 }
 
 .chart-container {
-  margin: 10px;
-  padding: 40px;
-  background: #f5f5f5;
+  margin: 10px 0px 10px 10px;
+  padding: 30px 40px;
+  background: var(--secondary-bg);
   border-radius: 10px;
 }
 
@@ -159,25 +174,31 @@ body {
   margin: 0px 0px 40px 0px;
 }
 
+.hour-cont {
+  display: flex;
+  justify-content: center;
+}
+
 .chart-visual-col {
-  border-right: 1px dashed #333333;
-  border-bottom: 1px dashed #333333;
-  width: 4.16%;
-  height: 15vh;
+  border-right: 1px dashed var(--misc-colors);
+  border-bottom: 1px dashed var(--misc-colors);
+  width: 2.5rem;
+  height: 100px;
   display: inline;
   position: relative;
   border-collapse: collapse;
 }
 
 .chart-visual-col:first-child {
-  border-left: 1px dashed #333333;
+  border-left: 1px dashed var(--misc-colors);
 }
 
 .chart-time-label {
   position: relative;
-  left: -50%;
-  top: -20%;
+  left: -85%;
+  top: -25%;
   font-size: 70%;
+  user-select: none;
 }
 
 .description-legend {
@@ -186,30 +207,89 @@ body {
   flex-direction: row;
 }
 
-.clr-icon-regular {
-  background-color: #35b6ff;
+.clr-icon {
   display: block;
   width: 20px;
   height: 20px;
   border-radius: 5px;
 }
 
-.clr-icon-edited {
-  background-color: #ff9a35;
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
+.regular {
+  background: rgb(0,141,252);
+  background: linear-gradient(90deg, rgba(0,141,252,1) 0%, rgba(0,94,191,1) 100%);
 }
 
-.clr-icon-substitute {
-  background-color: #ff2b4b;
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
+.edited {
+  background: rgb(65,57,195);
+  background: linear-gradient(90deg, rgba(65,57,195,1) 0%, rgba(255,192,0,1) 0%, rgba(223,86,0,1) 100%);
+}
+
+.substitute {
+  background: rgb(65,57,195);
+  background: linear-gradient(90deg, rgba(65,57,195,1) 0%, rgba(255,49,49,1) 0%, rgba(162,0,0,1) 100%);
 }
 
 .chart-data-legend {
   margin: 0px 10px 0px 5px;
+}
+
+.event-bar-container {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  
+}
+
+.event-bar {
+  user-select: none;
+  box-sizing: border-box;
+  border-radius: 25px;
+  padding: 10px;
+  color: var(--text-contrast);
+  font-size: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  z-index: 2;
+  position: absolute;
+  top: -70px;
+  max-height: 40px;
+}
+
+.date-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-text-day {
+  font-size: 350%;
+  font-weight: bold;
+  display: inline;
+  user-select: none;
+}
+
+.date-text-month {
+  font-size: 200%;
+  display: inline;
+  user-select: none;
+}
+
+.date-text-year {
+  display: inline;
+  font-size: 200%;
+  user-select: none;
+}
+
+.input-group {
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #2c3034;
+}
+
+input :focus {
+  border: 5px solid red !important;
+}
+
+.system-time  {
+  font-size: 140%;
 }

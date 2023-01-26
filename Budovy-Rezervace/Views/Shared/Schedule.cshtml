@@ -1,0 +1,100 @@
+@using System.Globalization
+@model Event
+<body>
+<div class="container">
+    <div class="row">
+        <div>
+            <h2>Room @ViewData["rid"] - Schedule</h2>
+            <p class="descriptive-id">Traceroute: home>@ViewData["pid"]-@ViewData["bname"]>@ViewData["rid"]>schedule</p>
+            <hr/>
+        </div>
+        <div class="col-2">
+            <div class="control-panel-block">   
+                <h3>Add Event</h3>
+                <hr/>
+                <form method="post" asp-controller="Event" asp-action="CreateEvent">
+                    <label for="eventStart">Event Start</label><br/>
+                    <input class="input-group pink" name="eventStart" required="required" type="datetime-local"/><br/>
+                    <label for="eventEnd">Event End</label><br/>
+                    <input class="input-group pink" name="eventEnd" required="required" type="datetime-local"/><br/>
+                    <label for="eventName">Event Name</label><br/>
+                    <input class="input-group pink" type="text" name="eventName" required="required"/><br/>
+                    <label for="eventDescr">Event Description</label><br/>
+                    <textarea class="input-group pink" name="eventDescr"></textarea>
+                    <input type="hidden" name="pid" value="@ViewData["pid"]"/>
+                    <input type="hidden" name="rid" value="@ViewData["rid"]"/>
+                    <input class="btn-primary gradient-red" type="submit"/>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-10">
+            @{
+                List<Event> eventTemp = new List<Event>();
+
+                // Sort event data from CSV to List
+                foreach (var line in File.ReadAllLines($"Data/Buildings/{ViewData["pid"]}/{ViewData["rid"]}/schedule.csv").Skip(0))
+                {
+                    string[] data = line.Split('|');
+                    Console.WriteLine($"{data[0]}, {data[1]}, {data[2]}, {data[3]}");
+                    eventTemp.Add(new Event(data[0], data[1], data[2], data[3]));
+                }
+
+                var eventsGrouped =
+                    from @event in eventTemp
+                    group @event by @event.EventStart.Date
+                    into newGroup
+                    orderby newGroup.Key
+                    select newGroup;
+
+                foreach (var nameGroup in eventsGrouped)
+                {
+                    <div class="chart-container">
+                        <div class="date-header-container">
+                            <div>
+                                <span class="header-gradient-text date-text-day">@nameGroup.Key.ToString(CultureInfo.InvariantCulture).Split(" ")[0].Split("/")[1]</span>
+                                <span class="header-gradient-text date-text-month">/@nameGroup.Key.ToString(CultureInfo.InvariantCulture).Split(" ")[0].Split("/")[0]</span>
+                            </div>
+                            <div>
+                                <span class="header-gradient-text date-text-year">@nameGroup.Key.ToString(CultureInfo.InvariantCulture).Split(" ")[0].Split("/")[2]</span>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row hour-cont">
+                            @for (int i = 0; i < 24; i++)
+                            {
+                                <div class="chart-visual-col">
+                                    <span class="chart-time-label">@i:00</span>
+                                </div>
+                            }
+                            <div class="event-bar-container">
+                                @foreach (var eventEntry in nameGroup)
+                                {
+                                    Console.WriteLine(eventEntry.EventName);
+                                    Console.WriteLine($"Length: {((eventEntry.EventEnd.Hour + ((double)eventEntry.EventEnd.Minute / 60)) - (eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60)))}h");
+                                    Console.WriteLine($"Start: {((eventEntry.EventEnd.Hour + ((double)eventEntry.EventEnd.Minute / 60)) - (eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60))) * 4.16}%");
+                                    <div class="event-bar regular"
+                                         style="left: @(((eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60)) * 4.16))%; 
+                                         width: @(((eventEntry.EventEnd.Hour + ((double)eventEntry.EventEnd.Minute / 60)) - (eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60))) * 4.16)%;"
+                                         title="@($"{eventEntry.EventName}\n {eventEntry.EventStart} - {eventEntry.EventEnd}\n {eventEntry.EventDescription}")">
+                                        <span>@eventEntry.EventName | @eventEntry.EventStart - @eventEntry.EventEnd</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="description-legend">
+                            <div class="clr-icon regular"></div>
+                            <p class="chart-data-legend">Regular</p>
+                            <div class="clr-icon substitute"></div>
+                            <p class="chart-data-legend">Substitute</p>
+                            <div class="clr-icon edited"></div>
+                            <p class="chart-data-legend">Edited</p>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+</body>
