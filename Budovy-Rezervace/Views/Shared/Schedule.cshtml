@@ -6,6 +6,9 @@
         <div>
             <h2>Room @ViewData["rid"] - Schedule</h2>
             <p class="descriptive-id">Traceroute: home>@ViewData["pid"]-@ViewData["bname"]>@ViewData["rid"]>schedule</p>
+            <div class="error-box" style="display: @(ViewData["?Error"].ToString().Equals("True") ? "block" : "none");">
+                <span>Error: @ViewData["ErrorMessage"]</span>
+            </div>
             <hr/>
         </div>
         <div class="col-2">
@@ -25,7 +28,32 @@
                     <input type="hidden" name="rid" value="@ViewData["rid"]"/>
                     <input class="btn-primary gradient-red" type="submit"/>
                 </form>
-
+            </div>
+            
+            <div class="control-panel-block">
+                <h3>Edit Event</h3>
+                <hr/>
+                <form method="post" asp-controller="Event" asp-action="UpdateEventData">
+                    <label>Post to edit:</label><br/>
+                    <select name="editedPost" class="input-group">
+                        @{
+                            foreach (var e in System.IO.File.ReadAllLines($"Data/Buildings/{ViewData["pid"]}/{ViewData["rid"]}/schedule.csv").Skip(1))
+                            {
+                                var es = e.Split("|");
+                                <option title="@es[2] - @es[1], @es[3]">@es[2]</option>
+                            }
+                          }
+                    </select><br/>
+                    <label>Start Date & Time</label><br>
+                    <input class="input-group" type="datetime-local" name="eventStart"/><br/>
+                    <label>End Date & Time</label><br>
+                    <input class="input-group" type="datetime-local" name="eventEnd"/><br/>
+                    <label for="eventName">Event Name</label><br/>
+                    <input class="input-group" name="eventName" type="text" /><br/>
+                    <label for="eventDescription">Event Description</label><br/>
+                    <input class="input-group" name="eventDescription"/>
+                    <input type="submit" class="btn-primary gradient-red"/>
+                </form>
             </div>
         </div>
         <div class="col-10">
@@ -33,10 +61,10 @@
                 List<Event> eventTemp = new List<Event>();
 
                 // Sort event data from CSV to List
-                foreach (var line in File.ReadAllLines($"Data/Buildings/{ViewData["pid"]}/{ViewData["rid"]}/schedule.csv").Skip(0))
+                foreach (var line in File.ReadAllLines($"Data/Buildings/{ViewData["pid"]}/{ViewData["rid"]}/schedule.csv").Skip(1))
                 {
                     string[] data = line.Split('|');
-                    Console.WriteLine($"{data[0]}, {data[1]}, {data[2]}, {data[3]}");
+                    // Console.WriteLine($"{data[0]}, {data[1]}, {data[2]}, {data[3]}");
                     eventTemp.Add(new Event(data[0], data[1], data[2], data[3]));
                 }
 
@@ -70,9 +98,9 @@
                             <div class="event-bar-container">
                                 @foreach (var eventEntry in nameGroup)
                                 {
-                                    Console.WriteLine(eventEntry.EventName);
-                                    Console.WriteLine($"Length: {((eventEntry.EventEnd.Hour + ((double)eventEntry.EventEnd.Minute / 60)) - (eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60)))}h");
-                                    Console.WriteLine($"Start: {((eventEntry.EventEnd.Hour + ((double)eventEntry.EventEnd.Minute / 60)) - (eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60))) * 4.16}%");
+                                    // Console.WriteLine(eventEntry.EventName);
+                                    // Console.WriteLine($"Length: {((eventEntry.EventEnd.Hour + ((double)eventEntry.EventEnd.Minute / 60)) - (eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60)))}h");
+                                    // Console.WriteLine($"Start: {((eventEntry.EventEnd.Hour + ((double)eventEntry.EventEnd.Minute / 60)) - (eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60))) * 4.16}%");
                                     <div class="event-bar regular"
                                          style="left: @(((eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60)) * 4.16))%; 
                                          width: @(((eventEntry.EventEnd.Hour + ((double)eventEntry.EventEnd.Minute / 60)) - (eventEntry.EventStart.Hour + ((double)eventEntry.EventStart.Minute / 60))) * 4.16)%;"

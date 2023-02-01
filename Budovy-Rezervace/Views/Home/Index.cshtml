@@ -20,6 +20,27 @@
                 </form>
             </div>
             <div class="control-panel-block">
+                <h3>Edit Building</h3>
+                <hr/>
+                <form method="post" asp-action="EditBuilding">
+                    <label for="pid">Building PID</label><br/>
+                    <select name="pid" class="form-select" required="required">
+                        @{
+                            foreach (string data in System.IO.File.ReadLines("Data/Buildings/buildings.csv").Skip(1))
+                            {
+                                string[] buildingData = data.Split('|');
+                                <option>@buildingData[0]</option>
+                            }
+                        }
+                    </select><br/>
+                    <label for="buildingName">New Building Name</label><br>
+                    <input class="input-group" name="buildingName" type="text"/><br/>
+                    <label for="buildingAdress">New Building Adress</label>
+                    <input class="input-group" name="buildingAdress" type="text"/><br/>
+                    <input class="btn-primary" type="submit"/>
+                </form>
+            </div>
+            <div class="control-panel-block">
                 <h3>Remove building</h3>
                 <hr/>
                 <form asp-controller="Home" asp-action="DeleteBuilding" method="post">
@@ -32,7 +53,7 @@
                             }
                         }
                     </select>
-                    <input class="btn-primary" type="submit">
+                    <input class="btn-danger" type="submit">
                 </form>
             </div>
             <div class="control-panel-block">

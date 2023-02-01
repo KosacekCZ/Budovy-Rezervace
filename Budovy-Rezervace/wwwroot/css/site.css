@@ -293,3 +293,21 @@ input :focus {
 .system-time  {
   font-size: 140%;
 }
+
+.error-box {
+  background-color: rgba(255, 0, 0, 0.18);
+  padding: 5px 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+}
+
+.error-box span {
+  font-size: 70%;
+}
+option :first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+select option :last-child {
+  border-radius: 0px 0px 10px 10px;
+}

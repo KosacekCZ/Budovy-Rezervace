@@ -42,16 +42,30 @@ public class HomeController : Controller
         return View("Index");
     }
 
-    [HttpPatch]
-    public IActionResult EditBuilding()
+    [HttpPost]
+    public IActionResult EditBuilding(string pid, string buildingName, string buildingAdress)
     {
+        Dictionary<string, BuildingModel> temp = TemporaryDataLoader();
+        temp[pid].Name = buildingName;
+        temp[pid].Adress = buildingAdress;
+        // Write new File header to CSV, re-create file
+        System.IO.File.WriteAllText("Data/Buildings/buildings.csv", 
+            "ID | Building Name | Building Adress\n");
+
+        foreach (var entry in temp)
+        {
+            System.IO.File.AppendAllText("Data/Buildings/buildings.csv", 
+                $"{entry.Key.Trim(' ')}|{entry.Value.Name}|{entry.Value.Adress}\n");
+        }
+        buildings.Clear();
+        temp.Clear();
         return View("Index");
     }
 
     [HttpPost]
     public IActionResult DeleteBuilding(string buildingId)
     {
-        Console.WriteLine(buildingId);
+        // Console.WriteLine(buildingId);
         Dictionary<string, BuildingModel> temp = TemporaryDataLoader();
         temp.Remove(buildingId);
         Directory.Delete($"Data/Buildings/{buildingId}", true);
@@ -102,6 +116,8 @@ public class HomeController : Controller
         ViewData["pid"] = pid;
         ViewData["rid"] = rid;
         ViewData["bname"] = bname;
+        ViewData["ErrorMessage"] = "null";
+        ViewData["?Error"] = false;
         return View("Schedule");
     }
 
