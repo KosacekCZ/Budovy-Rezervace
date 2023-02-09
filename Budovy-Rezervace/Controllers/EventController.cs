@@ -68,6 +68,6 @@ public class EventController : Controller
                 }
             }
         }
-        return true;
+        return false;
     }
 }
