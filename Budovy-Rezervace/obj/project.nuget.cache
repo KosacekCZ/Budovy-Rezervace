@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "a4ovMD7SH/02H7RoRCb9Lb36whuOTgA0MbEppVC8QblQN7Ni01UVi8dG+HyRZLvTJkcKLPoEdkz00cHmuO3fqQ==",
+  "dgSpecHash": "D349Kew0zjBb6ukpLXMCaORDpfAji/Bx2JQ1CRvB0/+VDbNz1W3k7TTfZvMr4n4t4jIu2KX+O1ABtUhyyNG0LQ==",
   "success": true,
   "projectFilePath": "/home/mikolasp/RiderProjects/Budovy-Rezervace/Budovy-Rezervace/Budovy-Rezervace.csproj",
   "expectedPackageFiles": [
-    "/home/mikolasp/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.2/microsoft.aspnetcore.app.ref.7.0.2.nupkg.sha512"
+    "/home/mikolasp/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.7/microsoft.aspnetcore.app.ref.7.0.7.nupkg.sha512"
   ],
   "logs": []
 }
